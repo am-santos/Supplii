@@ -16,8 +16,11 @@ const passportConfigure = require('./passport-configuration.js');
 const indexRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
+const hbs = require('hbs');
 
 const app = express();
+
+hbs.registerPartials(join(__dirname, 'views/partials'));
 
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'hbs');

@@ -24,7 +24,14 @@ const roleGuard = (roles) => (req, res, next) => {
 
 // Home Page - List of Products
 userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
-  res.render('user/home-page-layout'); // need to add user info?
+  Product.find()
+    .then((products) => {
+      console.log('product', products);
+      res.render('user/home-page-layout', { products }); // name is not confirmed!!
+    })
+    .catch((err) => {
+      next(err);
+    });
 });
 
 // Profile Page - personal area
@@ -66,6 +73,7 @@ userRouter.post(
     const supplyTrigger = req.body.supplyTrigger;
 
     return Product.create({
+      ownerId,
       name,
       category,
       shortDescription,

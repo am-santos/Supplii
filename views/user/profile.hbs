@@ -1,6 +1,6 @@
 <h1>User Profile</h1>
-<p>Hello, {{name}}!</p>
-<p>You are a {{ role }}</p>
+<p>Hello, {{user.name}}!</p>
+<p>You are a {{ user.role }}</p>
 
 <h1>Update your profile</h1>
 
@@ -18,10 +18,14 @@
     <input type="email" id="input-email" name="email" placeholder="Your Email" />
     <br>
 
+    <label for="input-role">Role</label>
+    <input type="text" id="input-role" name="role" placeholder="Your Role" />
+    <br>
+
     <label for="input-password">Password</label>
     <input type="password" name="password" id="input-password" placeholder="A Strong Password" />
     <br>
 
-    <button>Sign Up</button>
+    <button>Update</button>
 
 </form>
