@@ -7,7 +7,7 @@ const Product = require('../models/product');
 
 const routeGuard = require('../middleware/route-guard');
 
-const ownerRouter = new Router();
+const userRouter = new Router();
 
 // Owners Route Guard
 const allowedRoles = ['owner'];
@@ -23,12 +23,12 @@ const roleGuard = (roles) => (req, res, next) => {
 // routers in here
 
 // Home Page - List of Products
-ownerRouter.get('/', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+userRouter.get('/', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   res.render('');
 });
 
 // Profile Page - personal area
-ownerRouter.get('/profile/:ownerId', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+userRouter.get('/profile/:ownerId', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   const ownerId = req.params.ownerId;
 
   User.findById({ _id: ownerId })
@@ -41,14 +41,17 @@ ownerRouter.get('/profile/:ownerId', routeGuard, roleGuard(allowedRoles), (req, 
 });
 
 // Product Page - View
-ownerRouter.get(
+userRouter.get(
   '/:ownerId/product/:productId',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
     const productId = req.params.productId;
+    const ownerId = req.params.ownerId;
 
     // --------<< AUTHORIZED OWNER ISSUE>>--------
+    // mkae camparison to send true or false to single page view.
+    let productOwner;
 
     return Product.findById({ _id: productId })
       .then((product) => {
@@ -61,7 +64,7 @@ ownerRouter.get(
 );
 
 // Product Page - Create
-ownerRouter.get(
+userRouter.get(
   '/create-product/:ownerId',
   routeGuard,
   roleGuard(allowedRoles),
@@ -70,7 +73,7 @@ ownerRouter.get(
   }
 );
 
-ownerRouter.post(
+userRouter.post(
   '/create-product/:ownerId',
   routeGuard,
   roleGuard(allowedRoles),
@@ -84,7 +87,7 @@ ownerRouter.post(
 );
 
 // Product Page - Update
-ownerRouter.get(
+userRouter.get(
   '/:ownerId/update-product/:productId',
   routeGuard,
   roleGuard(allowedRoles),
@@ -106,4 +109,4 @@ ownerRouter.get(
   }
 );
 
-module.exports = ownerRouter;
+module.exports = userRouter;
