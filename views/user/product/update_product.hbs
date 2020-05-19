@@ -1,0 +1,50 @@
+<h1> Update your product </h1>
+
+<form action="update" method="POST" enctype="multipart/form-data">
+
+    <label for="input-picture">Product's picture</label>
+    <input type="file" value='{{ product.productPhotoUrl }}' id="product-picture">
+    <br>
+
+    <label for="input-name">Product's name</label>
+    <input type="text" value='{{ product.name }}' id="input-name">
+    <br>
+
+    <label for="category">Product's category </label>
+    <select require value='{{ product.category }}' id="productCategory">
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="type3">Type 3</option>
+        <option value="type4">Type 4</option>
+        <option value="type5">Type 5</option>
+    </select>
+    <br>
+
+    <label for="input-short-description">Product's short description</label>
+    <input type="text" value='{{ product.shortDescription }}' id="input-short-description"
+        placeholder="Describe your product">
+    <br>
+
+    <label for="input-long-description">Product's long description</label>
+    <textarea id="long-description" placeholder="Describe your product">{{ product.longDescription }}</textarea>
+    <br>
+
+    <label for="product-quantity">Quantity</label>
+    <input type="number" value="{{ product.quantity }}" id="product-quantity">
+    <br>
+
+    <label for="product-price">Product's price</label>
+    <input type="number" value='{{ product.price }}' id="product-price">
+    <br>
+
+    <label for="supply-trigger">Supply Trigger</label>
+    <input type="number" value='{{ product.supplyTrigger }}' id="supply-trigger">
+    <br>
+
+    {{!--}}
+    <form action="/user/{{ product.user }}/product/{{ product._id }}/delete" method="POST">
+        <button>Delete Item</button>
+    </form>
+    {{/!--}}
+
+</form>

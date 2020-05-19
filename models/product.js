@@ -3,9 +3,6 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  id: {
-    type: mongoose.Schema.Types.ObjectId
-  },
   ownerId: {
     type: mongoose.Schema.Types.ObjectId
   },

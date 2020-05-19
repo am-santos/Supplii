@@ -18,7 +18,6 @@ const schema = new mongoose.Schema({
   },
   role: {
     type: String,
-    // required: true,
     enum: ['client', 'owner', 'supplier'],
     default: 'client'
   },
