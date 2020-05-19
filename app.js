@@ -15,6 +15,7 @@ const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js')
 const passportConfigure = require('./passport-configuration.js');
 const indexRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
+const clientRouter = require('./routes/client');
 
 const app = express();
 
@@ -26,8 +27,7 @@ app.use(
   sassMiddleware({
     src: join(__dirname, 'public'),
     dest: join(__dirname, 'public'),
-    outputStyle:
-      process.env.NODE_ENV === 'development' ? 'nested' : 'compressed',
+    outputStyle: process.env.NODE_ENV === 'development' ? 'nested' : 'compressed',
     force: process.env.NODE_ENV === 'development',
     sourceMap: true
   })
@@ -57,8 +57,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bindUserToViewLocals);
 
+// Role Route Guard, is it possible?
+// Use role guard in here, instead of repeating it inside every route
+// Only do it once on the following routes
+
+// Routes
 app.use('/', indexRouter);
 app.use('/authentication', authenticationRouter);
+app.use('/client', clientRouter);
 
 // Catch missing routes and forward to error handler
 app.use((req, res, next) => {
