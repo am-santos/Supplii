@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   id: {
-    type: ObjectId
+    type: mongoose.Schema.Types.ObjectId
   },
   ownerId: {
-    type: ObjectId
+    type: mongoose.Schema.Types.ObjectId
   },
   name: {
     type: String,

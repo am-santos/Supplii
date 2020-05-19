@@ -1,3 +1,11 @@
 'use strict';
 
-const express = require('express');
+const { Router } = require('express');
+
+const passport = require('passport');
+
+const clientRouter = new Router();
+
+// routers in here
+
+module.exports = clientRouter;

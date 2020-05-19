@@ -13,10 +13,19 @@ router.get('/sign-up', (req, res, next) => {
 router.post(
   '/sign-up',
   passport.authenticate('local-sign-up', {
-    successRedirect: '/private',
+    successRedirect: '/waiting-confirmation',
     failureRedirect: '/sign-up'
   })
 );
+
+router.get('/waiting-confirmation', (req, res, next) => {
+  res.render('waiting-confirmation');
+});
+
+router.get('/confirmation/:token', (req, res, next) => {
+  const token = req.params.token;
+  res.render('confirmation', { token });
+});
 
 router.get('/sign-in', (req, res, next) => {
   res.render('sign-in');
