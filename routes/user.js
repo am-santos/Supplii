@@ -23,39 +23,59 @@ const roleGuard = (roles) => (req, res, next) => {
 // routers in here
 
 // Home Page - List of Products
-userRouter.get('/', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
-  res.render('');
+userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+  res.render('user/home-page-layout'); // need to add user info?
 });
 
 // Profile Page - personal area
-userRouter.get('/profile/:ownerId', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
-  const ownerId = req.params.ownerId;
+userRouter.get('/profile/:userId', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+  const userId = req.params.userId;
 
-  User.findById({ _id: ownerId })
-    .then((owner) => {
-      res.render('user/profile', { owner });
+  User.findById({ _id: userId })
+    .then((user) => {
+      res.render('user/profile', { user }); // name is not confirmed!!
     })
     .catch((err) => {
       next(err);
     });
 });
 
-// Product Page - View
-userRouter.get(
-  '/:ownerId/product/:productId',
+// Edit Profile page
+/* userRouter.get('/profile/:userId/edit', (req, res, next) => {
+  res.render('user/profile_edit');
+}); */
+
+// Product Page - Create
+userRouter.get('/:userid/product/create', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+  res.render('user/product/create_product');
+});
+
+userRouter.post(
+  '/:userid/product/create',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
-    const productId = req.params.productId;
     const ownerId = req.params.ownerId;
 
-    // --------<< AUTHORIZED OWNER ISSUE>>--------
-    // mkae camparison to send true or false to single page view.
-    let productOwner;
+    const name = req.body.productName;
+    const category = req.body.category;
+    const shortDescription = req.body.shortDescription;
+    const longDescription = req.body.longDescription;
+    const quantity = req.body.productQuantity;
+    const price = req.body.productPrice;
+    const supplyTrigger = req.body.supplyTrigger;
 
-    return Product.findById({ _id: productId })
+    return Product.create({
+      name,
+      category,
+      shortDescription,
+      longDescription,
+      quantity,
+      price,
+      supplyTrigger: { quantity: supplyTrigger }
+    })
       .then((product) => {
-        res.render('user/product/single', { product });
+        res.redirect(`user/${product.ownerId}/product/${product._id}`);
       })
       .catch((err) => {
         next(err);
@@ -63,45 +83,88 @@ userRouter.get(
   }
 );
 
-// Product Page - Create
+// Product Page - View
 userRouter.get(
-  '/create-product/:ownerId',
+  '/:userId/product/:productId',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
-    res.render('user/product/create');
-  }
-);
+    const productId = req.params.productId;
+    const userId = req.params.userId;
 
-userRouter.post(
-  '/create-product/:ownerId',
-  routeGuard,
-  roleGuard(allowedRoles),
-  (req, res, next) => {
-    const ownerId = req.params.ownerId;
+    let productOwner = false;
 
-    return Product.create({});
-
-    // res.render('user/product/create');
+    return Product.findById({ _id: productId })
+      .then((product) => {
+        if (userId === product.ownerId) {
+          productOwner = true;
+        }
+        res.render('user/product/single', { product, productOwner });
+      })
+      .catch((err) => {
+        next(err);
+      });
   }
 );
 
 // Product Page - Update
 userRouter.get(
-  '/:ownerId/update-product/:productId',
+  '/user/:userid/product/:productId/update',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
-    const owner = req.params.ownerId;
+    const owner = req.params.userId;
     const productId = req.params.productId;
 
     return Product.findById({ _id: productId })
       .then((product) => {
         if (owner === product.ownerId) {
-          res.render('user/product/update', { product });
+          res.render('user/product/update_product', { product });
         } else {
           res.redirect(`/${owner}/product/${productId}`);
         }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
+
+userRouter.post(
+  '/user/:userid/product/:productId/update',
+  routeGuard,
+  roleGuard(allowedRoles),
+  (req, res, next) => {
+    // URL information
+    const productId = req.params.productId;
+    const userId = req.params.userId;
+
+    // Form information
+    const name = req.body.productName;
+    const category = req.body.category;
+    const shortDescription = req.body.shortDescription;
+    const longDescription = req.body.longDescription;
+    const quantity = req.body.productQuantity;
+    const price = req.body.productPrice;
+    const supplyTrigger = req.body.supplyTrigger;
+
+    return Product.findByIdAndUpdate(
+      {
+        _id: productId,
+        ownerId: userId
+      },
+      {
+        name,
+        category,
+        shortDescription,
+        longDescription,
+        quantity,
+        price,
+        supplyTrigger: { quantity: supplyTrigger }
+      }
+    )
+      .then((product) => {
+        res.redirect(`/${product.ownerId}/product/${product._id}`);
       })
       .catch((err) => {
         next(err);
