@@ -1,9 +1,7 @@
 <h1> Product's list </h1>
-
+<a href="/user/{{userId}}/product/create">Create Product</a>
 <ul>
   {{#each products}}
-    <p>one</p>
-    <p>{{name}}</p>
     {{> product_item }}
   {{/each}}
 </ul>

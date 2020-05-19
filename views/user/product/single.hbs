@@ -3,12 +3,13 @@
 <img src="{{ product.productPhotoUrl }}" alt="{{ product.name }}">
 <h2> {{ product.name }} </h2>
 <h4> {{ product.category }} </h4>
+<p>Product Owner: {{product.ownerId.name}} </p>
 <p> {{ product.longDescription }} </p>
-<h4> {{ product.price }} </h4>
-<h4> {{ product.quantity }} </h4>
+<h4>Price: {{ product.price }} Euros</h4>
+<h4>Availability: {{ product.quantity }} </h4>
 
 {{#if productOwner}}
-<a href="/user/{{ product.ownerId }}/product/{{ product._id }}/update">Update Product</a>
+<a href="/user/{{ product.ownerId._id }}/product/{{ product._id }}/update">Update Product</a>
 
 {{else}}
 <a href="">Order</a>

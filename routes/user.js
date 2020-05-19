@@ -24,10 +24,10 @@ const roleGuard = (roles) => (req, res, next) => {
 
 // Home Page - List of Products
 userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+  const userId = req.params.userId;
   Product.find()
     .then((products) => {
-      console.log('product', products);
-      res.render('user/home-page-layout', { products }); // name is not confirmed!!
+      res.render('user/home-page-layout', { products, userId }); // name is not confirmed!!
     })
     .catch((err) => {
       next(err);
@@ -40,7 +40,7 @@ userRouter.get('/profile/:userId', routeGuard, roleGuard(allowedRoles), (req, re
 
   User.findById({ _id: userId })
     .then((user) => {
-      res.render('user/profile', { user }); // name is not confirmed!!
+      res.render('user/profile', { user });
     })
     .catch((err) => {
       next(err);
@@ -62,8 +62,7 @@ userRouter.post(
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
-    const ownerId = req.params.ownerId;
-
+    const ownerId = req.params.userid;
     const name = req.body.productName;
     const category = req.body.category;
     const shortDescription = req.body.shortDescription;
@@ -83,7 +82,7 @@ userRouter.post(
       supplyTrigger: { quantity: supplyTrigger }
     })
       .then((product) => {
-        res.redirect(`user/${product.ownerId}/product/${product._id}`);
+        res.redirect(`${product._id}`);
       })
       .catch((err) => {
         next(err);
@@ -103,8 +102,9 @@ userRouter.get(
     let productOwner = false;
 
     return Product.findById({ _id: productId })
+      .populate('ownerId')
       .then((product) => {
-        if (userId === product.ownerId) {
+        if (String(userId) === String(product.ownerId._id)) {
           productOwner = true;
         }
         res.render('user/product/single', { product, productOwner });
@@ -117,7 +117,7 @@ userRouter.get(
 
 // Product Page - Update
 userRouter.get(
-  '/user/:userid/product/:productId/update',
+  '/:userid/product/:productId/update',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
@@ -126,11 +126,12 @@ userRouter.get(
 
     return Product.findById({ _id: productId })
       .then((product) => {
-        if (owner === product.ownerId) {
-          res.render('user/product/update_product', { product });
-        } else {
-          res.redirect(`/${owner}/product/${productId}`);
-        }
+        res.render('user/product/update_product', { product });
+
+        /* if (String(owner) === String(product.ownerId)) {
+      } else {
+        res.redirect(`/${owner}/product/${productId}`);
+      } */
       })
       .catch((err) => {
         next(err);
@@ -139,7 +140,7 @@ userRouter.get(
 );
 
 userRouter.post(
-  '/user/:userid/product/:productId/update',
+  '/:userid/product/:productId/update',
   routeGuard,
   roleGuard(allowedRoles),
   (req, res, next) => {
@@ -156,23 +157,38 @@ userRouter.post(
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
 
-    return Product.findByIdAndUpdate(
-      {
-        _id: productId,
-        ownerId: userId
-      },
-      {
-        name,
-        category,
-        shortDescription,
-        longDescription,
-        quantity,
-        price,
-        supplyTrigger: { quantity: supplyTrigger }
-      }
-    )
+    return Product.findByIdAndUpdate(productId, {
+      name,
+      category,
+      shortDescription,
+      longDescription,
+      quantity,
+      price,
+      supplyTrigger: { quantity: supplyTrigger }
+    })
+      .populate('ownerId')
       .then((product) => {
-        res.redirect(`/${product.ownerId}/product/${product._id}`);
+        //Use render or redirect ???
+        res.render('user/product/single', { product });
+        // res.redirect(`/${product.ownerId}/product/${product._id}`);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
+
+userRouter.post(
+  '/:userid/product/:productId/delete',
+  routeGuard,
+  roleGuard(allowedRoles),
+  (req, res, next) => {
+    const productId = req.params.productId;
+    const userId = req.params.userid;
+
+    Product.findOneAndDelete({ _id: productId })
+      .then(() => {
+        res.redirect(`/user/${userId}/home`);
       })
       .catch((err) => {
         next(err);

@@ -1,17 +1,14 @@
 <h1> Update your product </h1>
 
-<form action="update" method="POST" enctype="multipart/form-data">
+<form action="" method="POST">
 
-    <label for="input-picture">Product's picture</label>
-    <input type="file" value='{{ product.productPhotoUrl }}' id="product-picture">
-    <br>
 
     <label for="input-name">Product's name</label>
-    <input type="text" value='{{ product.name }}' id="input-name">
+    <input type="text" name="productName" value='{{ product.name }}' id="input-name">
     <br>
 
     <label for="category">Product's category </label>
-    <select require value='{{ product.category }}' id="productCategory">
+    <select require name="category" value='{{ product.category }}' id="productCategory">
         <option value="type1">Type 1</option>
         <option value="type2">Type 2</option>
         <option value="type3">Type 3</option>
@@ -21,30 +18,30 @@
     <br>
 
     <label for="input-short-description">Product's short description</label>
-    <input type="text" value='{{ product.shortDescription }}' id="input-short-description"
+    <input name="shortDescription" type="text" value='{{ product.shortDescription }}' id="input-short-description"
         placeholder="Describe your product">
     <br>
 
     <label for="input-long-description">Product's long description</label>
-    <textarea id="long-description" placeholder="Describe your product">{{ product.longDescription }}</textarea>
+    <textarea name="longDescription" id="long-description" placeholder="Describe your product">{{ product.longDescription }}</textarea>
     <br>
 
     <label for="product-quantity">Quantity</label>
-    <input type="number" value="{{ product.quantity }}" id="product-quantity">
+    <input name="productQuantity" type="number" value="{{ product.quantity }}" id="product-quantity">
     <br>
 
     <label for="product-price">Product's price</label>
-    <input type="number" value='{{ product.price }}' id="product-price">
+    <input name="productPrice" type="number" value='{{ product.price }}' id="product-price">
     <br>
 
     <label for="supply-trigger">Supply Trigger</label>
-    <input type="number" value='{{ product.supplyTrigger }}' id="supply-trigger">
+    <input name="supplyTrigger" type="number" value='{{ product.supplyTrigger }}' id="supply-trigger">
     <br>
 
-    {{!--}}
-    <form action="/user/{{ product.user }}/product/{{ product._id }}/delete" method="POST">
-        <button>Delete Item</button>
-    </form>
-    {{/!--}}
-
+    <button>Update Item</button>
 </form>
+
+<form action="/user/{{ product.ownerId._id }}/product/{{ product._id }}/delete" method="POST">
+    <button>Delete</button>
+</form>
+

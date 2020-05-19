@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
   ownerId: {
-    type: mongoose.Schema.Types.ObjectId
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   },
   name: {
     type: String,
