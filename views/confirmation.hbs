@@ -1,10 +1,12 @@
 <h1>Confirmation Page</h1>
 
-<h5> {{token}} </h5>
-
-<select require name="role" id="">
-  <option value="">Select your role</option>
-  <option value="client">Client</option>
-  <option value="owner">Owner</option>
-  <option value="supplier">Supplier</option>
-</select>
+<h5> {{user.name}} </h5>
+<form action="/{{user.role}}/home/{{user._id}}" method="POST">
+  <select require name="role" id="">
+    <option value="">Select your role</option>
+    <option value="client">Client</option>
+    <option value="owner">Owner</option>
+    <option value="supplier">Supplier</option>
+  </select>
+  <button>Submit Role</button>
+</form>

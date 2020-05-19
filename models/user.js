@@ -16,16 +16,19 @@ const schema = new mongoose.Schema({
   passwordHash: {
     type: String
   },
-
   role: {
     type: String,
-    required: true,
+    // required: true,
     enum: ['client', 'owner', 'supplier'],
     default: 'client'
   },
   profilePhotoUrl: {
     type: String,
     path: String
+  },
+  confirmationToken: {
+    type: String,
+    default: 'test123'
   }
 });
 

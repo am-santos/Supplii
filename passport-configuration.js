@@ -12,10 +12,10 @@ passport.serializeUser((user, callback) => {
 
 passport.deserializeUser((id, callback) => {
   User.findById(id)
-    .then(user => {
+    .then((user) => {
       callback(null, user);
     })
-    .catch(error => {
+    .catch((error) => {
       callback(error);
     });
 });
@@ -29,19 +29,25 @@ passport.use(
     },
     (req, email, password, callback) => {
       const name = req.body.name;
+      let tempPassword;
       bcryptjs
         .hash(password, 10)
-        .then(hash => {
+        .then((hash) => {
+          tempPassword = hash;
+          return bcryptjs.hash(hash, 10);
+        })
+        .then((hashedToken) => {
           return User.create({
             name,
             email,
-            passwordHash: hash
+            passwordHash: tempPassword,
+            confirmationToken: hashedToken
           });
         })
-        .then(user => {
+        .then((user) => {
           callback(null, user);
         })
-        .catch(error => {
+        .catch((error) => {
           callback(error);
         });
     }
@@ -55,18 +61,18 @@ passport.use(
     User.findOne({
       email
     })
-      .then(document => {
+      .then((document) => {
         user = document;
         return bcryptjs.compare(password, user.passwordHash);
       })
-      .then(passwordMatchesHash => {
+      .then((passwordMatchesHash) => {
         if (passwordMatchesHash) {
           callback(null, user);
         } else {
           callback(new Error('WRONG_PASSWORD'));
         }
       })
-      .catch(error => {
+      .catch((error) => {
         callback(error);
       });
   })
