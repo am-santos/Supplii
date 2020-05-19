@@ -1,0 +1,15 @@
+<title> {{ product.name }} </title>
+
+<img src="{{ product.productPhotoUrl }}" alt="{{ product.name }}">
+<h2> {{ product.name }} </h2>
+<h4> {{ product.category }} </h4>
+<p> {{ product.longDescription }} </p>
+<h4> {{ product.price }} </h4>
+<h4> {{ product.quantity }} </h4>
+
+{{#if productOwner}}
+<a href="/user/{{ product.ownerId }}/product/{{ product._id }}/update">Update Product</a>
+
+{{else}}
+<a href="">Order</a>
+{{/if}}
