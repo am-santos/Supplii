@@ -22,15 +22,27 @@ const roleGuard = (roles) => (req, res, next) => {
 
 // routers in here
 
-// Home Page - List of Products
+// Home Page - List of Owned Products
 userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   const userId = req.params.userId;
 
-  // find products of this owner
-
   Product.find({ ownerId: userId })
     .then((products) => {
-      res.render('user/home-page-layout', { products, userId }); // name is not confirmed!!
+      res.render('user/home-page-layout', { products, userId });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+// Home Page - List of Products
+userRouter.get('/home', (req, res, next) => {
+  const userId = req.params.userId;
+
+  Product.find({ quantity: { $gt: 100 } })
+    .populate('ownerId')
+    .then((products) => {
+      res.render('user/home-page-layout', { products, userId });
     })
     .catch((err) => {
       next(err);
@@ -38,7 +50,7 @@ userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, 
 });
 
 // Profile Page - personal area
-userRouter.get('/profile/:userId', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
+userRouter.get('/profile/:userId', routeGuard, (req, res, next) => {
   const userId = req.params.userId;
 
   User.findById({ _id: userId })
@@ -50,10 +62,44 @@ userRouter.get('/profile/:userId', routeGuard, roleGuard(allowedRoles), (req, re
     });
 });
 
-// Edit Profile page
-/* userRouter.get('/profile/:userId/edit', (req, res, next) => {
-  res.render('user/profile_edit');
-}); */
+// Update Profile page
+userRouter.get('/profile/:userId/update', (req, res, next) => {
+  const userId = req.params.userId;
+
+  User.findById(userId)
+    .then((user) => {
+      res.render('user/update_profile', { user });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+userRouter.post('/profile/:userId/update', (req, res, next) => {
+  const userId = req.params.userId;
+
+  const name = req.body.name;
+  const email = req.body.email;
+  const role = req.body.role;
+
+  User.findByIdAndUpdate(
+    userId,
+    {
+      name,
+      email,
+      role
+    },
+    {
+      new: true
+    }
+  )
+    .then((user) => {
+      res.redirect(`/user/profile/${user._id}`);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 // Product Page - Create
 userRouter.get('/:userid/product/create', routeGuard, roleGuard(allowedRoles), (req, res, next) => {

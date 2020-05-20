@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         res.locals.user.isClient = true;
         break;
       case 'owner':
-        res.locals.user.owner = true;
+        res.locals.user.isOwner = true;
         break;
       case 'supplier':
         res.locals.user.isSupplier = true;

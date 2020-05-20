@@ -9,7 +9,12 @@
   </head>
   <body>
     <nav>
-      <a href="/user/{{user._id}}/home">Home</a>
+      <a href="/user/home">Home</a>
+      <p> {{isOwner}} </p>
+      {{#if user.isOwner}}
+        <a href="/user/{{user._id}}/home">My Products</a>
+        <a href="/user/{{user._id}}/product/create">Create Product</a>
+      {{/if}}
       {{#if user}}
         <a href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
         <form action="/authentication/sign-out" method="POST">
