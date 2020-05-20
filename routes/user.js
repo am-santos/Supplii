@@ -169,8 +169,8 @@ userRouter.post(
       .populate('ownerId')
       .then((product) => {
         //Use render or redirect ???
-        res.render('user/product/single', { product });
-        // res.redirect(`/${product.ownerId}/product/${product._id}`);
+        // res.render('user/product/single', { product });
+        res.redirect(`/${product.ownerId}/product/${product._id}`);
       })
       .catch((err) => {
         next(err);
