@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/styles/style.css" />
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-warning">
-      <a href="/user/home">Home</a>
-      {{#if user}}
-        {{#if user.isOwner}}
-          <a href="/user/{{user._id}}/home">My Products</a>
-          <a href="/user/{{user._id}}/product/create">Create Product</a>
-        {{/if}}
-        <a href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
-        <form action="/authentication/sign-out" method="POST">
-          <button>Sign Out</button>
-        </form>
-        {{else}}
-        <a href="/authentication/sign-in">Sign In</a>
-        <a href="/authentication/sign-up">Sign Up</a>
-      {{/if}}
-    </nav>
-    {{{body}}}
-    <script src="/scripts/script.js"></script>
 
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-dark navbar-transparent navbar-fixed-top">
+    <a href="/user/home">Home</a>
+    {{#if user}}
+    {{#if user.isOwner}}
+    <a href="/user/{{user._id}}/home">My Products</a>
+    <a href="/user/{{user._id}}/product/create">Create Product</a>
+    {{/if}}
+    <a href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
+    <form action="/authentication/sign-out" method="POST">
+      <button type="button" class="btn btn-warning">Logout</button>
+    </form>
+    {{else}}
+    <a href="/authentication/sign-in">Login</a>
+    <a href="/authentication/sign-up">Register</a>
+    {{/if}}
+  </nav>
+
+  {{!-- removed the {{{body}}} for testing reasons --}}
+  {{{body}}}
+  <script src="/scripts/script.js"></script>
+
+</body>
+
 </html>
