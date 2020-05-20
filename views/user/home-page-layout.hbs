@@ -1,7 +1,13 @@
 <h1> Product's list </h1>
-
+   
 <ul>
   {{#each products}}
-    {{> product_item }}
+    {{#if ../user}}
+      <a href="/user/{{../user._id}}/product/{{ _id }}">
+        {{> product_item }}
+      </a>
+    {{else}}
+      {{> product_item }}
+    {{/if}}
   {{/each}}
 </ul>

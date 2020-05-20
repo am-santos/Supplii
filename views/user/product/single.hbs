@@ -9,8 +9,11 @@
 <h4>Availability: {{ product.quantity }} </h4>
 
 {{#if productOwner}}
+<h4>Trigger Quantity: {{ product.supplyTrigger.quantity }} </h4>
+<br/>
 <a href="/user/{{ product.ownerId._id }}/product/{{ product._id }}/update">Update Product</a>
+{{/if}}
 
-{{else}}
-<a href="">Order</a>
+{{#if user.isclient}}
+  <a href="">Order</a>
 {{/if}}

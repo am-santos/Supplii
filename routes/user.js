@@ -10,7 +10,7 @@ const routeGuard = require('../middleware/route-guard');
 const userRouter = new Router();
 
 // Owners Route Guard
-const allowedRoles = ['owner'];
+let allowedRoles = ['owner'];
 
 const roleGuard = (roles) => (req, res, next) => {
   if (roles.includes(req.user.role)) {
@@ -20,9 +20,10 @@ const roleGuard = (roles) => (req, res, next) => {
   }
 };
 
-// routers in here
+// ---------->> LIST OF PRODUCTS ROUTES <<---------------
 
 // Home Page - List of Owned Products
+allowedRoles = ['owner'];
 userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   const userId = req.params.userId;
 
@@ -49,13 +50,15 @@ userRouter.get('/home', (req, res, next) => {
     });
 });
 
+// ---------->> PROFILE ROUTES <<---------------
+
 // Profile Page - personal area
 userRouter.get('/profile/:userId', routeGuard, (req, res, next) => {
   const userId = req.params.userId;
 
   User.findById({ _id: userId })
-    .then((user) => {
-      res.render('user/profile', { user });
+    .then((renderUser) => {
+      res.render('user/profile', { renderUser });
     })
     .catch((err) => {
       next(err);
@@ -63,7 +66,7 @@ userRouter.get('/profile/:userId', routeGuard, (req, res, next) => {
 });
 
 // Update Profile page
-userRouter.get('/profile/:userId/update', (req, res, next) => {
+userRouter.get('/profile/:userId/update', routeGuard, (req, res, next) => {
   const userId = req.params.userId;
 
   User.findById(userId)
@@ -75,7 +78,7 @@ userRouter.get('/profile/:userId/update', (req, res, next) => {
     });
 });
 
-userRouter.post('/profile/:userId/update', (req, res, next) => {
+userRouter.post('/profile/:userId/update', routeGuard, (req, res, next) => {
   const userId = req.params.userId;
 
   const name = req.body.name;
@@ -101,7 +104,10 @@ userRouter.post('/profile/:userId/update', (req, res, next) => {
     });
 });
 
+// ---------->> PRODUCT ROUTES <<---------------
+
 // Product Page - Create
+allowedRoles = ['owner'];
 userRouter.get('/:userid/product/create', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   res.render('user/product/create_product');
 });
@@ -140,29 +146,28 @@ userRouter.post(
 );
 
 // Product Page - View
-userRouter.get(
-  '/:userId/product/:productId',
-  routeGuard,
-  roleGuard(allowedRoles),
-  (req, res, next) => {
-    const productId = req.params.productId;
-    const userId = req.params.userId;
+userRouter.get('/:userId/product/:productId', routeGuard, (req, res, next) => {
+  const productId = req.params.productId;
+  const userId = req.params.userId;
 
-    let productOwner = false;
+  let productOwner = false;
 
-    return Product.findById({ _id: productId })
-      .populate('ownerId')
-      .then((product) => {
-        if (String(userId) === String(product.ownerId._id)) {
-          productOwner = true;
-        }
-        res.render('user/product/single', { product, productOwner });
-      })
-      .catch((err) => {
-        next(err);
-      });
-  }
-);
+  return Product.findById(productId)
+    .populate('ownerId')
+    .then((product) => {
+      // console.log('User ID:', userId);
+      // console.log('Owner ID:', product.ownerId);
+      // console.log('productOwner :', productOwner);
+      if (String(userId) === String(product.ownerId._id)) {
+        productOwner = true;
+      }
+      // console.log('productOwner :', productOwner);
+      res.render('user/product/single', { product, productOwner });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
 
 // Product Page - Update
 userRouter.get(
@@ -177,10 +182,7 @@ userRouter.get(
       .then((product) => {
         res.render('user/product/update_product', { product });
 
-        /* if (String(owner) === String(product.ownerId)) {
-      } else {
-        res.redirect(`/${owner}/product/${productId}`);
-      } */
+        // Secure owners that do not own the product to update it ??
       })
       .catch((err) => {
         next(err);
@@ -250,5 +252,7 @@ userRouter.post(
       });
   }
 );
+
+// ---------->> SUPPLIERS ROUTES <<---------------
 
 module.exports = userRouter;

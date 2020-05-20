@@ -1,30 +1,36 @@
 Base route: /user
 
-home page
+home page -> DONE
 
 - user: all users -> each have different view details
 - view.hbs: user/home-page-layout
 - URL: /user/:userid/home
 
-profile page
+profile page -> DONE
+
+- user: all users -> each have different view details
+- view.hbs: user/profile_edit
+- URL: /user/profile/:userid/edit
+
+edit profile
 
 - user: all users -> each have different view details
 - view.hbs: user/profile
 - URL: /user/profile/:userid
 
-product page view
-
-- user: all users -> owner view & all others
-- view.hbs: user/product/single
-- URL: /user/:userid/product/:productId
-
-create product
+create product -> DONE
 
 - user: all users -> any owner view
 - view.hbs: user/product/create_product
 - URL: /user/:userid/product/create
 
-update roduct
+product page view -> DONE
+
+- user: all users -> owner view & all others
+- view.hbs: user/product/single
+- URL: /user/:userid/product/:productId
+
+update roduct -> DONE
 
 - user: all users -> owner view
 - view.hbs: user/product/update_product
