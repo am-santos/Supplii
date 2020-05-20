@@ -7,6 +7,23 @@ const Product = require('../models/product');
 
 const routeGuard = require('../middleware/route-guard');
 
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+const multerStorageCloudinary = require('multer-storage-cloudinary');
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = multerStorageCloudinary({
+  cloudinary,
+  folder: 'Project-2-fullstack-api'
+});
+
+const uploader = multer({ storage });
+
 const userRouter = new Router();
 
 // Owners Route Guard
@@ -70,39 +87,47 @@ userRouter.get('/profile/:userId/update', routeGuard, (req, res, next) => {
   const userId = req.params.userId;
 
   User.findById(userId)
-    .then((user) => {
-      res.render('user/update_profile', { user });
+    .then((renderUser) => {
+      res.render('user/update_profile', { renderUser });
     })
     .catch((err) => {
       next(err);
     });
 });
 
-userRouter.post('/profile/:userId/update', routeGuard, (req, res, next) => {
-  const userId = req.params.userId;
+userRouter.post(
+  '/profile/:userId/update',
+  routeGuard,
+  uploader.single('picture'),
+  (req, res, next) => {
+    const userId = req.params.userId;
 
-  const name = req.body.name;
-  const email = req.body.email;
-  const role = req.body.role;
+    const name = req.body.name;
+    const email = req.body.email;
+    const role = req.body.role;
 
-  User.findByIdAndUpdate(
-    userId,
-    {
-      name,
-      email,
-      role
-    },
-    {
-      new: true
-    }
-  )
-    .then((user) => {
-      res.redirect(`/user/profile/${user._id}`);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+    const profilePhotoUrl = req.file.url;
+
+    User.findByIdAndUpdate(
+      userId,
+      {
+        name,
+        email,
+        role,
+        profilePhotoUrl
+      },
+      {
+        new: true
+      }
+    )
+      .then((renderUser) => {
+        res.redirect(`/user/profile/${renderUser._id}`);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
+);
 
 // ---------->> PRODUCT ROUTES <<---------------
 
@@ -116,6 +141,7 @@ userRouter.post(
   '/:userid/product/create',
   routeGuard,
   roleGuard(allowedRoles),
+  uploader.single('picture'),
   (req, res, next) => {
     const ownerId = req.params.userid;
     const name = req.body.productName;
@@ -125,6 +151,7 @@ userRouter.post(
     const quantity = req.body.productQuantity;
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
+    const productPhotoUrl = req.file.url;
 
     return Product.create({
       ownerId,
@@ -134,6 +161,7 @@ userRouter.post(
       longDescription,
       quantity,
       price,
+      productPhotoUrl,
       supplyTrigger: { quantity: supplyTrigger }
     })
       .then((product) => {
@@ -207,6 +235,7 @@ userRouter.post(
     const quantity = req.body.productQuantity;
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
+    const productPhotoUrl = req.file.url;
 
     return Product.findByIdAndUpdate(
       productId,
@@ -217,6 +246,7 @@ userRouter.post(
         longDescription,
         quantity,
         price,
+        productPhotoUrl,
         supplyTrigger: { quantity: supplyTrigger }
       },
       {
