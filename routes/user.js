@@ -53,11 +53,24 @@ userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, 
     });
 });
 
+// Home Page - Suppliers
+userRouter.get('/:userId/home/supplier', routeGuard, roleGuard(['supplier']), (req, res, next) => {
+  const userId = req.params.userId;
+
+  Product.find({ $expr: { $lte: ['$quantity', '$supplyTrigger.quantity'] } })
+    .then((products) => {
+      res.render('user/home-page-layout', { products, userId });
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // Home Page - List of Products
 userRouter.get('/home', (req, res, next) => {
   const userId = req.params.userId;
 
-  Product.find({ quantity: { $gt: 100 } })
+  Product.find({ $expr: { $gte: ['$quantity', '$supplyTrigger.quantity'] } })
     .populate('ownerId')
     .then((products) => {
       res.render('user/home-page-layout', { products, userId });
@@ -222,6 +235,7 @@ userRouter.post(
   '/:userid/product/:productId/update',
   routeGuard,
   roleGuard(allowedRoles),
+  uploader.single('picture'),
   (req, res, next) => {
     // URL information
     const productId = req.params.productId;
@@ -284,5 +298,11 @@ userRouter.post(
 );
 
 // ---------->> SUPPLIERS ROUTES <<---------------
+
+// profile page
+
+// list of needed items
+
+// product view information
 
 module.exports = userRouter;
