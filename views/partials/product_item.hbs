@@ -1,5 +1,9 @@
 <li>    
-    <strong>Product Name: {{name}}</strong>
-    <p>{{shortDescription}}</p>
-    <strong>Product Quantity: {{quantity}}</strong>
+    {{#if productPhotoUrl}}
+        <img src=" {{productPhotoUrl}} " alt="{{ name }}">
+    {{/if}}
+    <div>
+        <strong>Product Name: {{name}}</strong>
+        <p>{{shortDescription}}</p>
+    </div>
 </li>
