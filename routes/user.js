@@ -25,7 +25,10 @@ const roleGuard = (roles) => (req, res, next) => {
 // Home Page - List of Products
 userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, next) => {
   const userId = req.params.userId;
-  Product.find()
+
+  // find products of this owner
+
+  Product.find({ ownerId: userId })
     .then((products) => {
       res.render('user/home-page-layout', { products, userId }); // name is not confirmed!!
     })
@@ -157,20 +160,26 @@ userRouter.post(
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
 
-    return Product.findByIdAndUpdate(productId, {
-      name,
-      category,
-      shortDescription,
-      longDescription,
-      quantity,
-      price,
-      supplyTrigger: { quantity: supplyTrigger }
-    })
+    return Product.findByIdAndUpdate(
+      productId,
+      {
+        name,
+        category,
+        shortDescription,
+        longDescription,
+        quantity,
+        price,
+        supplyTrigger: { quantity: supplyTrigger }
+      },
+      {
+        new: true
+      }
+    )
       .populate('ownerId')
       .then((product) => {
         //Use render or redirect ???
         // res.render('user/product/single', { product });
-        res.redirect(`/${product.ownerId}/product/${product._id}`);
+        res.redirect(`/user/${product.ownerId._id}/product/${product._id}`);
       })
       .catch((err) => {
         next(err);
