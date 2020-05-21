@@ -85,7 +85,11 @@ router.get('/welcome/:token', (req, res, next) => {
   // if (token === savedToken) {
   //   confirmedUser = true;
   // }
-  User.findOneAndUpdate({ 'confirmation.token': token }, { $set: { 'confirmation.result': true } })
+  User.findOneAndUpdate(
+    { 'confirmation.token': token },
+    { $set: { 'confirmation.result': true } },
+    { new: true }
+  )
     .then((resUser) => {
       req.session.userId = resUser._id;
       confirmedUser = resUser.confirmation.result;

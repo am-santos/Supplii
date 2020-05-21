@@ -76,7 +76,7 @@ body {
   transition: all ease-in-out 300ms; }
 
 #product-card:hover {
-  background-color: rgba(16, 255, 255, 0.9);
+  background-color: lightskyblue;
   color: black;
   transform: translate(0px, -8px) scale(1);
   text-decoration: none; }
@@ -97,6 +97,10 @@ card-img-top {
   *display: inline;
   list-style-type: none;
   vertical-align: middle; }
+
+#navlist a {
+  text-decoration: none;
+  color: black; }
 
 #welcome-text {
   text-align: center; }

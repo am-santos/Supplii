@@ -84,7 +84,7 @@ body {
 }
 
 #product-card:hover {
-  background-color: rgba(16, 255, 255, 0.9);
+  background-color: lightskyblue; //rgba(16, 255, 255, 0.9);
   color: black;
   transform: translate(0px, -8px) scale(1);
   text-decoration: none;
@@ -101,12 +101,18 @@ card-img-top {
   font-weight: 800;
 }
 
-#navlist li {
-  display: inline-block;
-  zoom: 1;
-  *display: inline;
-  list-style-type: none;
-  vertical-align: middle;
+#navlist {
+  li {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    list-style-type: none;
+    vertical-align: middle;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
 }
 
 #welcome-text {
