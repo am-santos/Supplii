@@ -1,9 +1,29 @@
-<form action="/authentication/sign-up" method="POST">
-  <label for="input-name">Name</label>
-  <input type="text" id="input-name" name="name" placeholder="Your Name" />
-  <label for="input-email">Email</label>
-  <input type="email" id="input-email" name="email" placeholder="Your Email" />
-  <label for="input-password">Password</label>
-  <input type="password" name="password" id="input-password" placeholder="A Strong Password" />
-  <button>Sign Up</button>
-</form>
+<div class="card card-outline-secondary">
+  <div class="card-header">
+    <h3 class="mb-0 text-center">Welcome to suppli!</h3>
+  </div>
+  <div class="card-body">
+    <form action="/authentication/sign-up" class="form" role="form" id="loginForm" novalidate="" method="POST">
+
+      <div class="form-group">
+        <label for="input-name">Name</label>
+        <input type="text" id="input-name" class="form-control" name="name" placeholder="Your Name" />
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="input-email">Email</label>
+        <input type="email" id="input-email" class="form-control" name="email" placeholder="Your Email" />
+      </div>
+      <br>
+
+      <div class="form-group">
+        <label for="input-password">Password</label>
+        <input type="password" class="form-control" name="password" id="input-password"
+          placeholder="A Strong Password" />
+      </div>
+      <br>
+
+      <button class="btn btn-success float-right">Join us!</button>
+    </form>
+  </div>

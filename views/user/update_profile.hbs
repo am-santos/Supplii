@@ -1,32 +1,62 @@
-<h1>User Profile</h1>
+{{!-- <h1>User Profile</h1>
 <img src=" {{renderUser.profilePhotoUrl}} " alt="{{ renderUser.name }}">
 <p>Hello, {{renderUser.name}}!</p>
 <p>You are a {{ renderUser.role }}</p>
 
-<h1>Update your profile here:</h1>
+<input type="email" id="input-email" name="email" value="{{renderUser.email}}" placeholder="Your Email" />
+<br>
 
-<form action="" method="POST" enctype="multipart/form-data">
+<label for="input-role">Role</label>
+<input type="text" id="input-role" name="role" value="{{renderUser.role}}" placeholder="Your Role" />
+<br>
 
-    <label for="input-picture">Picture</label>
-    <input type="file" name="picture" id="picture-input">
-    <br>
-
-    <label for="input-name">Name</label>
-    <input type="text" id="input-name" name="name" value="{{renderUser.name}}" placeholder="Your Name" />
-    <br>
-
-    <label for="input-email">Email</label>
-    <input type="email" id="input-email" name="email" value="{{renderUser.email}}" placeholder="Your Email" />
-    <br>
-
-    <label for="input-role">Role</label>
-    <input type="text" id="input-role" name="role" value="{{renderUser.role}}" placeholder="Your Role" />
-    <br>
-
-{{!--     <label for="input-password">Password</label>
+    <label for="input-password">Password</label>
     <input type="password" name="password" id="input-password" placeholder="A Strong Password" />
-    <br> --}}
+    <br> 
 
-    <button>Update</button>
+<button>Update</button>
 
 </form>
+
+--}}
+
+<div class="card card-outline-secondary">
+    <div class="card-header">
+        <h3 class="mb-0 text-center">Update your info</h3>
+    </div>
+    <div class="card-body">
+        <form action="" class="form" role="form" id="loginForm" novalidate="" method="POST"
+            enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label for="input-picture">Picture</label>
+                <input type="file" name="picture" id="picture-input">
+            </div>
+
+            <div class="form-group">
+                <label for="input-name">Name</label>
+                <input type="text" id="input-name" class="form-control" name="name" value="{{renderUser.name}}"
+                    placeholder="Your Name" />
+            </div>
+
+            <div class="form-group">
+                <label for="input-email">Email</label>
+                <input type="email" id="input-email" class="form-control" name="email" value="{{renderUser.email}}"
+                    placeholder="Your Email" />
+            </div>
+
+            <div>
+                <label for="input-role">Role</label>
+                <input type="text" id="input-role" class="form-control" name="role" value="{{renderUser.role}}"
+                    placeholder="Your Role" />
+            </div>
+
+            <div class="form-group">
+                <label for="input-password">Password</label>
+                <input type="password" class="form-control" name="password" id="input-password"
+                    placeholder="A Strong Password" />
+            </div>
+
+            <button class="btn btn-success float-right">Update</button>
+        </form>
+    </div>
