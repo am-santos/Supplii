@@ -1,9 +1,10 @@
-<li>    
-    {{#if productPhotoUrl}}
-        <img src=" {{productPhotoUrl}} " alt="{{ name }}">
-    {{/if}}
-    <div>
-        <strong>Product Name: {{name}}</strong>
-        <p>{{shortDescription}}</p>
+<li>
+    <div class="card" id="product-card" style="width: 20rem;">
+        <div class="card-body">
+            <img class=" card-img-top" src=" {{productPhotoUrl}} " alt="{{ name }}">
+            <h4 class="card-title">{{name}}</h4>
+            <p class="card-text">{{shortDescription}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
     </div>
 </li>
