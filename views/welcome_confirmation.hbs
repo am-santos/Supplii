@@ -1,7 +1,3 @@
-<h1>Confirmation Page</h1>
-
-<h5> {{user.name}} </h5>
-
 {{#if confirmedUser}}
 <form action="" method="POST">
   {{!-- <select require name="role" id="">
@@ -11,19 +7,77 @@
     <option value="supplier">Supplier</option>
   </select> --}}
 
+  {{!-- Basic Radio submit
   <input type="radio" value="client" name="role" id="client-input">
   <label for="client-input">Client</label>
-  
+
   <input type="radio" value="owner" name="role" id="owner-input">
   <label for="owner-input">Owner</label>
-  
+
   <input type="radio" value="supplier" name="role" id="supplier-input">
   <label for="supplier-input">Supplier</label>
+--}}
 
-  <button>Submit Role</button>
+  <div class="container">
+
+    <h1>Radio Buttons as Cards</h1>
+
+    <div class="row">
+
+      <div class="col-md-4 col-lg-4 col-sm-4">
+
+        <input type="radio" value="client" name="role" class="card-input-element" id="client-input">
+        {{!-- <label for="client-input">Client</label> --}}
+
+        <div class="panel panel-default card-input">
+          <div class="panel-heading">Client</div>
+          <div class="panel-body">
+            I wanna see the best shops connected to supplii
+          </div>
+        </div>
+
+        </label>
+
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-4">
+
+        <input type="radio" value="owner" name="role" class="card-input-element" id="owner-input">
+        {{!-- <label for="owner-input">Owner</label> --}}
+
+        <div class="panel panel-default card-input">
+          <div class="panel-heading">Owner</div>
+          <div class="panel-body">
+            I wanna connect your shop to supplii
+          </div>
+        </div>
+        </label>
+
+      </div>
+      <div class="col-md-4 col-lg-4 col-sm-4">
+
+        <input type="radio" value="supplier" name="role" id="supplier-input">
+
+        <div class="panel panel-default card-input">
+          <div class="panel-heading">Supplier</div>
+          <div class="panel-body">
+            I wanna provide supplies for the shops in supplii
+          </div>
+        </div>
+        </label>
+
+      </div>
+    </div>
+
+  </div>
+
+  <button>Submit role</button>
 </form>
-{{else}}
 
-<h1>Please verify your email account.</h1>
-<h4>Click on the link send to you by email.</h4>
+{{else}}
+<div class="card" id="welcome page">
+  <div class="card-body">
+    <h4 class="card-title">Hello, {{ user.name }}</h4>
+    <p class="card-text">You're almost there! Now you just need to confirm your e-mail to access supplii!</p>
+  </div>
+</div>
 {{/if}}

@@ -10,7 +10,7 @@
 .center {
   color: wheat;
   font-family: 'Anton', sans-serif;
-  font-size: 50px;
+  font-size: 45px;
   position: absolute;
   width: 100px;
   height: 50px;
@@ -108,3 +108,8 @@ card-img-top {
   list-style-type: none;
   vertical-align: middle;
 }
+
+#welcome-text {
+  text-align: center;
+}
+
