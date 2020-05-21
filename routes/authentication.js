@@ -55,8 +55,8 @@ router.post('/sign-up', (req, res, next) => {
         to: `${process.env.NODEMAILER_EMAIL}`, //Change this when to deploy application
         // to: `${newUser.email}`, //Change this when to deploy application
         subject: `${newUser.name}, welcome to Suppli`,
-        // html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="http://localhost:3000/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
-        html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="https://supplii.herokuapp.com/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
+        html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="http://localhost:3000/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
+        // html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="https://supplii.herokuapp.com/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
       });
     })
     .then((emailResult) => {

@@ -19,17 +19,19 @@
   <nav class="navbar navbar-dark navbar-transparent navbar-fixed-top justify-content-end">
     <a class=" navbar-brand" href="/user/home">Home</a>
     {{#if user}}
-    {{#if user.isOwner}}
-    <a class="navbar-brand" href="/user/{{user._id}}/home">My Products</a>
-    <a class="navbar-brand" href="/user/{{user._id}}/product/create">Create Product</a>
-    {{/if}}
-    <a class="navbar-brand" href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
-    <form action="/authentication/sign-out" method="POST">
-      <button class="btn btn-warning">Logout</button>
-    </form>
+      {{#if user.isOwner}}
+        <a class="navbar-brand" href="/user/{{user._id}}/home">My Products</a>
+        <a class="navbar-brand" href="/user/{{user._id}}/product/create">Create Product</a>
+      {{else user.isSupplier}}
+        <a class="navbar-brand" href="/user/{{user._id}}/home/supplier">Needed Products</a>
+      {{/if}}
+      <a class="navbar-brand" href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
+      <form action="/authentication/sign-out" method="POST">
+        <button class="btn btn-warning">Logout</button>
+      </form>
     {{else}}
-    <a class="navbar-brand" href="/authentication/sign-in">Login</a>
-    <a class="register-button clickme warning" href="/authentication/sign-up">Register</a>
+      <a class="navbar-brand" href="/authentication/sign-in">Login</a>
+      <a class="register-button clickme warning" href="/authentication/sign-up">Register</a>
     {{/if}}
   </nav>
 
