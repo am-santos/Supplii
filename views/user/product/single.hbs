@@ -1,21 +1,24 @@
-<title> {{ product.name }} </title>
+<div class="card" id="product-single" style="width: 20rem;">
+  <div class="card-body">
+    <img class=" card-img-top" src="{{ product.productPhotoUrl }}" alt="{{ product.name }}">
+    <br>
+    <br>
+    <h4 class="card-title">{{ product.name }}</h4>
+    <p class="card-text">{{ product.shortDescription }}</p>
+    <p class="card-text">Owner: {{ product.ownerId.name }}</p>
+    <p class="card-text">{{ product.longDescription }}</p>
+    <p class="card-text"> Price: {{ product.price }} Euros </p>
+    <p class="card-text"> Availability: {{ product.quantity }} </p>
+    {{#if productOwner}}
+    <p>Trigger Quantity: {{ product.supplyTrigger.quantity }} </p>
+    <br>
+    <a href="/user/{{ product.ownerId._id }}/product/{{ product._id }}/update" class="btn btn-primary">Update
+      Product</a>
+    {{/if}}
 
-<img src="{{ product.productPhotoUrl }}" alt="{{ product.name }}">
-<h2> {{ product.name }} </h2>
-<h4> {{ product.category }} </h4>
-<p>Product Owner: {{product.ownerId.name}} </p>
-<p> {{ product.longDescription }} </p>
-<h4>Price: {{ product.price }} Euros</h4>
-<h4>Availability: {{ product.quantity }} </h4>
+    {{#if user.isclient}}
+    <a href="">Order</a>
+    {{/if}}
 
-{{#if productOwner}}
-<h4>Trigger Quantity: {{ product.supplyTrigger.quantity }} </h4>
-<br/>
-<a href="/user/{{ product.ownerId._id }}/product/{{ product._id }}/update">Update Product</a>
-{{/if}}
-
-{{#if user.isclient}}
-  <a href="">Order</a>
-{{/if}}
-
-
+  </div>
+</div>

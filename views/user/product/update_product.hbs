@@ -2,7 +2,7 @@
 
 <form action="" method="POST" enctype="multipart/form-data">
 
-{{!--     <p>Current picture:</p>
+    {{!--     <p>Current picture:</p>
     <img src=" {{product.productPhotoUrl " alt="{{ product.name ">
  --}}
     <label for="input-picture">Product's picture</label>
@@ -15,11 +15,11 @@
 
     <label for="category">Product's category </label>
     <select require name="category" value='{{ product.category }}' id="productCategory">
-        <option value="type1">Type 1</option>
-        <option value="type2">Type 2</option>
-        <option value="type3">Type 3</option>
-        <option value="type4">Type 4</option>
-        <option value="type5">Type 5</option>
+        <option value="type1">Cake</option>
+        <option value="type2">Toast</option>
+        <option value="type3">Coffee</option>
+        <option value="type4">Juice</option>
+        <option value="type5">Omelette</option>
     </select>
     <br>
 
@@ -29,7 +29,8 @@
     <br>
 
     <label for="input-long-description">Product's long description</label>
-    <textarea name="longDescription" id="long-description" placeholder="Describe your product">{{ product.longDescription }}</textarea>
+    <textarea name="longDescription" id="long-description"
+        placeholder="Describe your product">{{ product.longDescription }}</textarea>
     <br>
 
     <label for="product-quantity">Quantity</label>
@@ -50,4 +51,3 @@
 <form action="/user/{{ product.ownerId._id }}/product/{{ product._id }}/delete" method="POST">
     <button>Delete</button>
 </form>
-

@@ -71,6 +71,7 @@ body {
 }
 
 .card {
+  font-family: 'Roboto', sans-serif;
   margin: 0 auto; /* Added */
   float: none; /* Added */
   margin-bottom: 10px; /* Added */
@@ -106,7 +107,4 @@ card-img-top {
   *display: inline;
   list-style-type: none;
   vertical-align: middle;
-}
-
-#show-up {
 }
