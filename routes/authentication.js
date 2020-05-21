@@ -85,10 +85,9 @@ router.get('/welcome/:token', (req, res, next) => {
   // if (token === savedToken) {
   //   confirmedUser = true;
   // }
-  User.findOneAndUpdate(token, {
-    confirmation: { result: true }
-  })
+  User.findOneAndUpdate({ 'confirmation.token': token }, { $set: { 'confirmation.result': true } })
     .then((resUser) => {
+      req.session.userId = resUser._id;
       confirmedUser = resUser.confirmation.result;
       res.render('welcome_confirmation', { confirmedUser });
     })
@@ -99,13 +98,21 @@ router.get('/welcome/:token', (req, res, next) => {
 
 router.post('/welcome/:token', (req, res, next) => {
   const role = req.body.role;
-  const loggedUserId = req.user._id;
-  User.findByIdAndUpdate(loggedUserId, {
-    role
-  })
+  const token = req.params.token;
+  User.findOneAndUpdate({ 'confirmation.token': token }, { $set: { role: role } })
     .then((resUser) => {
       req.session.userId = resUser._id;
-      res.redirect(`/user/${resUser._id}/home`);
+      switch (role) {
+        case 'client':
+          res.redirect(`/user/home`);
+          break;
+        case 'owner':
+          res.redirect(`/user/${resUser._id}/home`);
+          break;
+        case 'supplier':
+          res.redirect(`/user/${resUser._id}/home/supplier`);
+          break;
+      }
     })
     .catch((err) => {
       next(err);
@@ -131,9 +138,6 @@ router.post('/sign-in', (req, res, next) => {
       return bcrypt.compare(password, resUser.passwordHash);
     })
     .then((compResult) => {
-      console.log('req.session', req.session);
-      console.log('req.user', req.user);
-
       if (compResult) {
         req.session.userId = signInUser._id;
         // res.locals.user = signInUser;
