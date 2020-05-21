@@ -21,7 +21,9 @@
   margin-top: -25px; }
 
 ​ .navbar {
-  font-size: large; }
+  font-size: large;
+  position: fixed;
+  top: 0; }
 
 .navbar-brand {
   font-family: 'Montserrat', sans-serif;
@@ -66,14 +68,17 @@ body {
   /* Added */
   float: none;
   /* Added */
+  max-width: 40vw;
   margin-bottom: 10px;
   /* Added */
-  max-width: 350px;
   border-radius: 2em;
   background-color: white;
   color: black;
   cursor: pointer;
   transition: all ease-in-out 300ms; }
+
+#sign-form {
+  max-width: 350px; }
 
 #product-card:hover {
   background-color: rgba(16, 255, 255, 0.9);

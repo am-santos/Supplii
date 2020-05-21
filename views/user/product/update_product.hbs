@@ -1,53 +1,79 @@
-<h1> Update your product </h1>
+<div class="card card-outline-secondary">
+    <div class="card-header">
+        <h3 class="mb-0 text-center">Update your product</h3>
+    </div>
+    <div class="card-body">
+        <form action="" class="form" role="form" id="loginForm" novalidate="" method="POST"
+            enctype="multipart/form-data">
 
-<form action="" method="POST" enctype="multipart/form-data">
 
-    {{!--     <p>Current picture:</p>
-    <img src=" {{product.productPhotoUrl " alt="{{ product.name ">
- --}}
-    <label for="input-picture">Product's picture</label>
-    <input type="file" name="picture" id="input-picture">
-    <br>
+            <div class="form-group">
+                <label for="input-name">Name</label>
+                <input type="text" name="productName" class="form-control" value='{{ product.name }}' id="input-name">
+            </div>
 
-    <label for="input-name">Product's name</label>
-    <input type="text" name="productName" value='{{ product.name }}' id="input-name">
-    <br>
+            <div class="form-group">
+                <label for="input-picture">Picture</label>
+                <input type="file" name="picture" class="form-control" id="input-picture">
+            </div>
 
-    <label for="category">Product's category </label>
-    <select require name="category" value='{{ product.category }}' id="productCategory">
-        <option value="type1">Cake</option>
-        <option value="type2">Toast</option>
-        <option value="type3">Coffee</option>
-        <option value="type4">Juice</option>
-        <option value="type5">Omelette</option>
-    </select>
-    <br>
+            <div class="form-group">
+                <label for="category">Category </label>
+                <select require name="category" class="form-control" value='{{ product.category }}'
+                    id="productCategory">
+                    <option value="type1">Cake</option>
+                    <option value="type2">Toast</option>
+                    <option value="type3">Coffee</option>
+                    <option value="type4">Juice</option>
+                    <option value="type5">Omelette</option>
+                </select>
+            </div>
 
-    <label for="input-short-description">Product's short description</label>
-    <input name="shortDescription" type="text" value='{{ product.shortDescription }}' id="input-short-description"
-        placeholder="Describe your product">
-    <br>
+            <div>
+                <label for="input-role">Role</label>
+                <input type="text" id="input-role" class="form-control" name="role" value="{{renderUser.role}}"
+                    placeholder="Your Role" />
+            </div>
 
-    <label for="input-long-description">Product's long description</label>
-    <textarea name="longDescription" id="long-description"
-        placeholder="Describe your product">{{ product.longDescription }}</textarea>
-    <br>
+            <div class="form-group">
+                <label for="input-password">Password</label>
+                <input type="password" class="form-control" name="password" id="input-password"
+                    placeholder="A Strong Password" />
+            </div>
+            <div class="form-group">
+                <label for="input-short-description">Short description</label>
+                <input name="shortDescription" class="form-control" type="text" value='{{ product.shortDescription }}'
+                    id="input-short-description" placeholder="Describe your product">
+            </div>
 
-    <label for="product-quantity">Quantity</label>
-    <input name="productQuantity" type="number" value="{{ product.quantity }}" id="product-quantity">
-    <br>
+            <div class="form-group">
+                <label for="input-long-description">Product's long description</label>
+                <textarea name="longDescription" class="form-control" id="long-description"
+                    placeholder="Describe your product">{{ product.longDescription }}</textarea>
+            </div>
 
-    <label for="product-price">Product's price</label>
-    <input name="productPrice" type="number" value='{{ product.price }}' id="product-price">
-    <br>
+            <div class="form-group">
+                <label for="product-quantity">Quantity</label>
+                <input name="productQuantity" class="form-control" type="number" value="{{ product.quantity }}"
+                    id="product-quantity">
+            </div>
 
-    <label for="supply-trigger">Supply Trigger</label>
-    <input name="supplyTrigger" type="number" value='{{ product.supplyTrigger }}' id="supply-trigger">
-    <br>
+            <div class="form-group">
+                <label for="product-price">Product's price</label>
+                <input name="productPrice" class="form-control" type="number" value='{{ product.price }}'
+                    id="product-price">
+            </div>
 
-    <button>Update Item</button>
-</form>
+            <div class="form-group">
+                <label for="supply-trigger">Supply Trigger</label>
+                <input name="supplyTrigger" class="form-control" type="number" value='{{ product.supplyTrigger }}'
+                    id="supply-trigger">
+            </div>
 
-<form action="/user/{{ product.ownerId._id }}/product/{{ product._id }}/delete" method="POST">
-    <button>Delete</button>
-</form>
+            <button class="btn btn-success float-right">Update</button>
+        </form>
+
+        <form action="/user/{{ product.ownerId._id }}/product/{{ product._id }}/delete" method="POST">
+            <button class="btn btn-danger">Delete</button>
+        </form>
+    </div>
