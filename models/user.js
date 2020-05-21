@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
     lowercase: true,
     trim: true
@@ -25,9 +26,14 @@ const schema = new mongoose.Schema({
     type: String,
     path: String
   },
-  confirmationToken: {
-    type: String,
-    default: 'test123'
+  confirmation: {
+    token: {
+      type: String,
+      default: 'test123'
+    },
+    result: {
+      type: Boolean
+    }
   }
 });
 

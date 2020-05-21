@@ -1,0 +1,29 @@
+<h1>Confirmation Page</h1>
+
+<h5> {{user.name}} </h5>
+
+{{#if confirmedUser}}
+<form action="" method="POST">
+  {{!-- <select require name="role" id="">
+    <option value="">Select your role</option>
+    <option value="client">Client</option>
+    <option value="owner">Owner</option>
+    <option value="supplier">Supplier</option>
+  </select> --}}
+
+  <input type="radio" value="client" name="role" id="client-input">
+  <label for="client-input">Client</label>
+  
+  <input type="radio" value="owner" name="role" id="owner-input">
+  <label for="owner-input">Owner</label>
+  
+  <input type="radio" value="supplier" name="role" id="supplier-input">
+  <label for="supplier-input">Supplier</label>
+
+  <button>Submit Role</button>
+</form>
+{{else}}
+
+<h1>Please verify your email account.</h1>
+<h4>Click on the link send to you by email.</h4>
+{{/if}}

@@ -24,7 +24,7 @@
     {{/if}}
     <a class="navbar-brand" href="/user/profile/{{user._id}}">{{user.name}}'s Profile</a>
     <form action="/authentication/sign-out" method="POST">
-      <button type="button" class="btn btn-warning">Logout</button>
+      <button class="btn btn-warning">Logout</button>
     </form>
     {{else}}
     <a class="navbar-brand" href="/authentication/sign-in">Login</a>

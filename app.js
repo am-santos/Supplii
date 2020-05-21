@@ -8,11 +8,12 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const passport = require('passport');
+//const passport = require('passport');
 const sassMiddleware = require('node-sass-middleware');
 const serveFavicon = require('serve-favicon');
+const deserializeUser = require('./middleware/deserializeUser');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
-const passportConfigure = require('./passport-configuration.js');
+// const passportConfigure = require('./passport-configuration.js');
 const indexRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 const userRouter = require('./routes/user');
@@ -56,8 +57,9 @@ app.use(
     })
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
+app.use(deserializeUser);
 app.use(bindUserToViewLocals);
 
 // Role Route Guard, is it possible?

@@ -119,20 +119,18 @@ userRouter.post(
     const email = req.body.email;
     const role = req.body.role;
 
-    const profilePhotoUrl = req.file.url;
+    let profilePhotoUrl;
 
-    User.findByIdAndUpdate(
-      userId,
-      {
-        name,
-        email,
-        role,
-        profilePhotoUrl
-      },
-      {
-        new: true
-      }
-    )
+    if (req.file) {
+      profilePhotoUrl = req.file.url;
+    }
+
+    User.findByIdAndUpdate(userId, {
+      name,
+      email,
+      role,
+      profilePhotoUrl
+    })
       .then((renderUser) => {
         res.redirect(`/user/profile/${renderUser._id}`);
       })
@@ -156,6 +154,7 @@ userRouter.post(
   roleGuard(allowedRoles),
   uploader.single('picture'),
   (req, res, next) => {
+    /*
     const ownerId = req.params.userid;
     const name = req.body.productName;
     const category = req.body.category;
@@ -164,6 +163,21 @@ userRouter.post(
     const quantity = req.body.productQuantity;
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
+    const productPhotoUrl = req.file.url;
+    */
+
+    const ownerId = req.params.userid;
+
+    const {
+      productName: name,
+      category,
+      shortDescription,
+      longDescription,
+      productQuantity: quantity,
+      productPrice: price,
+      supplyTrigger
+    } = req.body;
+
     const productPhotoUrl = req.file.url;
 
     return Product.create({
