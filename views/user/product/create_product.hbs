@@ -1,44 +1,52 @@
-<h1> Add your product </h1>
+<div class="card card-outline-secondary">
+    <div class="card-header">
+        <h3 class="mb-0 text-center">Add your product</h3>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST" class="form" role="form" enctype="multipart/form-data">
 
-<form action="" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="input-picture">Product's picture</label>
+                <input type="file" name="picture" id="product-picture">
+            </div>
 
-    <label for="input-picture">Product's picture</label>
-    <input type="file" name="picture" id="product-picture">
-    <br>
+            <div class="form-group">
+                <label for="category"> What's your product? </label>
+                <br>
+                <select require name="category" id="productCategory">
+                    <option value="type1">Cake</option>
+                    <option value="type2">Toast</option>
+                    <option value="type3">Coffee</option>
+                    <option value="type4">Juice</option>
+                    <option value="type5">Omelette</option>
+                </select>
+            </div>
 
-    <label for="input-name">Product's name</label>
-    <input require type="text" name="productName" id="input-name">
-    <br>
+            <div class="form-group">
+                <label for="input-short-description">Product's short description</label>
+                <input require type="text" name="shortDescription" id="input-short-description"
+                    placeholder="Describe your product">
+            </div>
 
-    <label for="category">Product's category </label>
-    <select require name="category" id="productCategory">
-        <option value="type1">Type 1</option>
-        <option value="type2">Type 2</option>
-        <option value="type3">Type 3</option>
-        <option value="type4">Type 4</option>
-        <option value="type5">Type 5</option>
-    </select>
-    <br>
 
-    <label for="input-short-description">Product's short description</label>
-    <input require type="text" name="shortDescription" id="input-short-description" placeholder="Describe your product">
-    <br>
+            <div class="form-group">
+                <label for="input-long-description">Product's long description</label>
+                <textarea name="longDescription" id="long-description" placeholder="Describe your product"></textarea>
+            </div>
 
-    <label for="input-long-description">Product's long description</label>
-    <textarea name="longDescription" id="long-description" placeholder="Describe your product"></textarea>
-    <br>
+            <div class="form-group">
+                <label for="product-quantity">Product's quantity</label>
+                <input require type="number" name="productQuantity" id="product-quantity">
+            </div>
 
-    <label for="product-quantity">Quantity</label>
-    <input require type="number" name="productQuantity" id="product-quantity">
-    <br>
+            <div class="form-group">
+                <label for="product-price">Product's price</label>
+                <input require type="number" name="productPrice" id="product-price">
+            </div>
 
-    <label for="product-price">Product's price</label>
-    <input require type="number" name="productPrice" id="product-price">
-    <br>
-
-    <label for="supply-trigger">Supply Trigger</label>
-    <input require type="number" name="supplyTrigger" id="supply-trigger">
-
-    <button>Create</button>
-
-</form>
+            <div class="form-group">
+                <label for="supply-trigger">Supply Trigger</label>
+                <input require type="number" name="supplyTrigger" id="supply-trigger">
+            </div>
+            <button class="btn btn-success float-right">Create!</button>
+        </form
