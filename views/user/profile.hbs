@@ -2,12 +2,9 @@
     <div class="card-cover"
         style="background-image: url('../../../../assets/img/kit/pro/sections/angelo-pantazis.jpg')">
     </div>
-    <div class="card-avatar border-white">
-        <a href="#avatar">
-            <img src="{{ renderUser.profilePhotoUrl}}" alt="{{ renderUser.name}}">
-        </a>
-    </div>
+
     <div class="card-body">
+        <img src="{{ renderUser.profilePhotoUrl}}" alt="{{ renderUser.name}}">
         <h4 class="card-title"> Hello, {{ renderUser.name }} </h4>
         <h6 class="card-category">Your role is: {{ renderUser.role }}</h6>
         <h6 class="card-title"> {{ renderUser.email }} </h4>
