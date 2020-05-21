@@ -18,59 +18,37 @@
   <label for="supplier-input">Supplier</label>
 --}}
 
+
+
   <div class="container">
 
-    <h1>Radio Buttons as Cards</h1>
+    <h1 id="welcome-text">There are multiple ways to join the supplii community, {{ user.name }}</h1>
 
-    <div class="row">
-
-      <div class="col-md-4 col-lg-4 col-sm-4">
-
-        <input type="radio" value="client" name="role" class="card-input-element" id="client-input">
-        {{!-- <label for="client-input">Client</label> --}}
-
-        <div class="panel panel-default card-input">
-          <div class="panel-heading">Client</div>
-          <div class="panel-body">
-            I wanna see the best shops connected to supplii
-          </div>
-        </div>
-
-        </label>
-
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-4">
-
-        <input type="radio" value="owner" name="role" class="card-input-element" id="owner-input">
-        {{!-- <label for="owner-input">Owner</label> --}}
-
-        <div class="panel panel-default card-input">
-          <div class="panel-heading">Owner</div>
-          <div class="panel-body">
-            I wanna connect your shop to supplii
-          </div>
-        </div>
-        </label>
-
-      </div>
-      <div class="col-md-4 col-lg-4 col-sm-4">
-
-        <input type="radio" value="supplier" name="role" id="supplier-input">
-
-        <div class="panel panel-default card-input">
-          <div class="panel-heading">Supplier</div>
-          <div class="panel-body">
-            I wanna provide supplies for the shops in supplii
-          </div>
-        </div>
-        </label>
-
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h4 class="card-title">Client</h4>
+        <p class="card-text">I wanna find all the best shops connected to supplii.</p>
+        <input type="radio" value="client" name="role" id="client-input">
       </div>
     </div>
 
-  </div>
+    <div class="card text-center" style="width: 20rem;">
+      <div class="card-body">
+        <h4 class="card-title">Owner</h4>
+        <p class="card-text">I wanna connect my business to the supplii network.</p>
+        <input type="radio" value="owner" name="role" id="owner-input">
+      </div>
+    </div>
 
-  <button>Submit role</button>
+    <div class="card text-right" style="width: 20rem;">
+      <div class="card-body">
+        <h4 class="card-title">Supplier</h4>
+        <p class="card-text">I can provide supplies to the shop owners.</p>
+        <input type="radio" value="supplier" name="role" id="supplier-input">
+      </div>
+    </div>
+
+    <button>Submit role</button>
 </form>
 
 {{else}}

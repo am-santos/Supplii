@@ -101,4 +101,9 @@ card-img-top {
 #welcome-text {
   text-align: center; }
 
+.badge {
+  font-size: 3em;
+  margin-bottom: 3em;
+  background-color: orange; }
+
 /*# sourceMappingURL=style.css.map */
