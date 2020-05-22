@@ -24,11 +24,13 @@
 
     <h1 id="welcome-text">There are multiple ways to join the supplii community, {{ user.name }}</h1>
 
-    <div class="card" style="width: 20rem;">
+    <div class="card text-center" style="width: 20rem;">
       <div class="card-body">
         <h4 class="card-title">Client</h4>
         <p class="card-text">I wanna find all the best shops connected to supplii.</p>
-        <input type="radio" value="client" name="role" id="client-input">
+        <label class="btn btn-secondary">
+          <input type="radio" value="client" name="role" autocomplete="off" id="client-input">
+        </label>
       </div>
     </div>
 
@@ -36,19 +38,24 @@
       <div class="card-body">
         <h4 class="card-title">Owner</h4>
         <p class="card-text">I wanna connect my business to the supplii network.</p>
-        <input type="radio" value="owner" name="role" id="owner-input">
+        <label class="btn btn-secondary">
+          <input type="radio" value="owner" name="role" autocomplete="off" id="owner-input">
+        </label>
       </div>
     </div>
 
-    <div class="card text-right" style="width: 20rem;">
+    <div class="card text-center" style="width: 20rem;">
       <div class="card-body">
         <h4 class="card-title">Supplier</h4>
         <p class="card-text">I can provide supplies to the shop owners.</p>
-        <input type="radio" value="supplier" name="role" id="supplier-input">
+        <label class="btn btn-secondary">
+          <input type="radio" value="supplier" name="role" autocomplete="off" id="supplier-input">
+        </label>
       </div>
     </div>
-
-    <button>Submit role</button>
+    <div class="col text-center">
+      <button class="btn btn-info">Submit role</button>
+    </div>
 </form>
 
 {{else}}
