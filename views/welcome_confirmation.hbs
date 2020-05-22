@@ -22,39 +22,40 @@
 
   <div class="container">
 
-    <h1 id="welcome-text">There are multiple ways to join the supplii community, {{ user.name }}</h1>
+    <h1 id="welcome-text"> <strong> Hello, {{ user.name }}!</strong><br/>There are multiple ways to join the supplii community. </h1>
 
     <div class="card text-center" style="width: 20rem;">
       <div class="card-body">
-        <h4 class="card-title">Client</h4>
-        <p class="card-text">I wanna find all the best shops connected to supplii.</p>
-        <label class="btn btn-secondary">
-          <input type="radio" value="client" name="role" autocomplete="off" id="client-input"> Client
+        <label class="">
+          <input type="radio" value="client" name="role" autocomplete="off" id="client-input">
+          <h4 class="card-title">Client</h4>
+          <p class="card-text">I wanna find all the best shops connected to supplii.</p>
         </label>
       </div>
     </div>
 
     <div class="card text-center" style="width: 20rem;">
       <div class="card-body">
-        <h4 class="card-title">Owner</h4>
-        <p class="card-text">I wanna connect my business to the supplii network.</p>
-        <label class="btn btn-secondary">
-          <input type="radio" value="owner" name="role" autocomplete="off" id="owner-input"> Owner
+        <label class="">
+          <input type="radio" value="owner" name="role" autocomplete="off" id="owner-input">
+          <h4 class="card-title">Owner</h4>
+          <p class="card-text">I wanna connect my business to the supplii network.</p>
         </label>
       </div>
     </div>
 
     <div class="card text-center" style="width: 20rem;">
       <div class="card-body">
-        <h4 class="card-title">Supplier</h4>
-        <p class="card-text">I can provide supplies to the shop owners.</p>
-        <label class="btn btn-secondary">
-          <input type="radio" value="supplier" name="role" autocomplete="off" id="supplier-input"> Supplier
+        
+        <label class="">
+          <input type="radio" value="supplier" name="role" autocomplete="off" id="supplier-input"> 
+          <h4 class="card-title">Supplier</h4>
+          <p class="card-text">I can provide supplies to the shop owners.</p>
         </label>
       </div>
     </div>
     <div class="col text-center">
-      <button class="btn btn-info">Submit role</button>
+      <button class="btn btn-info btn-warning"  id="submit-role">Submit role</button>
     </div>
 </form>
 

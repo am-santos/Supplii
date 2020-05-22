@@ -107,12 +107,23 @@ card-img-top {
   text-decoration: none;
   color: black; }
 
+#logged-nav-bar {
+  margin-bottom: 3em; }
+
 #welcome-text {
-  text-align: center; }
+  text-align: center;
+  margin-bottom: 1.3em; }
 
 .badge {
   font-size: 3em;
   margin-bottom: 3em;
   background-color: orange; }
+
+#submit-role {
+  padding: 0.7em 5.8em;
+  border-radius: 13px; }
+
+#single-product-img {
+  margin-bottom: 1.5em; }
 
 /*# sourceMappingURL=style.css.map */

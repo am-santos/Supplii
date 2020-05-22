@@ -276,8 +276,9 @@ userRouter.post(
     const supplyTrigger = req.body.supplyTrigger;
 
     let productPhotoUrl;
+    console.log('req.file', req.file);
     if (req.file) {
-      const productPhotoUrl = req.file.url;
+      productPhotoUrl = req.file.url;
     }
 
     return Product.findByIdAndUpdate(
