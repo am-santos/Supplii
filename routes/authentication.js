@@ -37,7 +37,9 @@ router.post('/sign-up', (req, res, next) => {
       return bcrypt.hash(pass, 10);
     })
     .then((hash) => {
-      const strHash = String(hash).replace('/', 'slash');
+      const strHash = String(hash)
+        .split('/')
+        .join();
       return User.create({
         name,
         email,

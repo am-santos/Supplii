@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="card card-outline-secondary">
     <div class="card-header">
         <h3 class="mb-0 text-center">Update your product</h3>
@@ -67,7 +66,7 @@
 
             <div class="form-group">
                 <label for="supply-trigger">Supply Trigger</label>
-                <input name="supplyTrigger" class="form-control" type="number" value='{{ product.supplyTrigger }}'
+                <input name="supplyTrigger" class="form-control" type="number" value='{{ product.supplyTrigger.quantity }}'
                     id="supply-trigger">
             </div>
 
@@ -78,60 +77,3 @@
             <button class="btn btn-danger">Delete</button>
         </form>
     </div>
-=======
-<h1> Update your product </h1>
-
-<form action="" method="POST" enctype="multipart/form-data">
-
-    {{!--     <p>Current picture:</p>
-    <img src=" {{product.productPhotoUrl " alt="{{ product.name ">
- --}}
-    <label for="input-name">Name</label>
-    <br/>
-    <input type="text" name="productName" class="form-control" value='{{ product.name }}' id="input-name">
-    <br>
-
-    <label for="input-picture">Picture</label>
-    <input type="file" name="picture" class="form-control" id="input-picture">
-    <br>
-
-
-    <label for="category">Category </label>
-    <select require name="category" value='{{ product.category }}' id="productCategory">
-        <option value="type1">Cake</option>
-        <option value="type2">Toast</option>
-        <option value="type3">Coffee</option>
-        <option value="type4">Juice</option>
-        <option value="type5">Omelette</option>
-    </select>
-    <br>
-
-    <label for="input-short-description">Short description</label>
-    <input name="shortDescription" class="form-control" type="text" value='{{ product.shortDescription }}' id="input-short-description"
-        placeholder="Describe your product">
-    <br>
-
-    <label for="input-long-description">Long description</label>
-    <textarea name="longDescription" class="form-control" id="long-description"
-        placeholder="Describe your product">{{ product.longDescription }}</textarea>
-    <br>
-
-    <label for="product-quantity">Quantity</label>
-    <input name="productQuantity" class="form-control" type="number" value="{{ product.quantity }}" id="product-quantity">
-    <br>
-
-    <label for="product-price">Price</label>
-    <input name="productPrice" class="form-control" type="number" value='{{ product.price }}' id="product-price">
-    <br>
-
-    <label for="supply-trigger">Supply Trigger</label>
-    <input name="supplyTrigger" class="form-control" type="number" value='{{ product.supplyTrigger.quantity }}' id="supply-trigger">
-    <br>
-
-    <button>Update Item</button>
-</form>
-
-<form action="/user/{{ product.ownerId._id }}/product/{{ product._id }}/delete" method="POST">
-    <button>Delete</button>
-</form>
->>>>>>> 6faca8bd80e79e03ffe0b23c6cc5c3db97b44d27
