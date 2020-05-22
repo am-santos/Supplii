@@ -54,8 +54,11 @@ router.post('/sign-up', (req, res, next) => {
       req.session.userId = newUser._id;
       return transporter.sendMail({
         from: `Suppli App${process.env.NODEMAILER_EMAIL}`,
-        to: `${process.env.NODEMAILER_EMAIL}`, //Change this when to deploy application
-        // to: `${newUser.email}`, //Change this when to deploy application
+
+        // For development:
+        // to: `${process.env.NODEMAILER_EMAIL}`, //Change this when to deploy application
+        // To deploy:
+        to: `${newUser.email}`, //Change this when to deploy application
         subject: `${newUser.name}, welcome to Suppli`,
         // Local
         // html: `<strong>Hello ${newUser.name}</strong><br/> <br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="http://localhost:3000/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
