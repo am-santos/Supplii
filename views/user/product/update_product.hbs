@@ -29,17 +29,6 @@
                 </select>
             </div>
 
-            <div>
-                <label for="input-role">Role</label>
-                <input type="text" id="input-role" class="form-control" name="role" value="{{renderUser.role}}"
-                    placeholder="Your Role" />
-            </div>
-
-            <div class="form-group">
-                <label for="input-password">Password</label>
-                <input type="password" class="form-control" name="password" id="input-password"
-                    placeholder="A Strong Password" />
-            </div>
             <div class="form-group">
                 <label for="input-short-description">Short description</label>
                 <input name="shortDescription" class="form-control" type="text" value='{{ product.shortDescription }}'
@@ -66,8 +55,8 @@
 
             <div class="form-group">
                 <label for="supply-trigger">Supply Trigger</label>
-                <input name="supplyTrigger" class="form-control" type="number" value='{{ product.supplyTrigger.quantity }}'
-                    id="supply-trigger">
+                <input name="supplyTrigger" class="form-control" type="number"
+                    value='{{ product.supplyTrigger.quantity }}' id="supply-trigger">
             </div>
 
             <button class="btn btn-success float-right">Update</button>
