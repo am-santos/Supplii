@@ -81,7 +81,7 @@ body {
   max-width: 350px; }
 
 #product-card:hover {
-  background-color: rgba(16, 255, 255, 0.9);
+  background-color: lightskyblue;
   color: black;
   transform: translate(0px, -8px) scale(1);
   text-decoration: none; }
@@ -103,6 +103,10 @@ card-img-top {
   list-style-type: none;
   vertical-align: middle; }
 
+#navlist a {
+  text-decoration: none;
+  color: black; }
+
 #welcome-text {
   text-align: center; }
 
@@ -110,5 +114,8 @@ card-img-top {
   font-size: 3em;
   margin-bottom: 3em;
   background-color: orange; }
+
+#update-product {
+  width: 50%; }
 
 /*# sourceMappingURL=style.css.map */
