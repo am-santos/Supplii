@@ -7,18 +7,18 @@
 
             <div class="form-group">
                 <label for="input-picture">Product's picture</label>
-                <input type="file" name="picture" id="product-picture">
+                <input type="file" name="picture" class="form-control" id="product-picture">
             </div>
 
             <div class="form-group">
                 <label for="input-name">Product's name</label>
-                <input require type="text" name="productName" id="input-name">
+                <input require type="text" name="productName" class="form-control" id="input-name">
             </div>
 
             <div class="form-group">
                 <label for="category"> What's your product? </label>
                 <br>
-                <select require name="category" id="productCategory">
+                <select require name="category" class="form-control" id="productCategory">
                     <option value="type1">Cake</option>
                     <option value="type2">Toast</option>
                     <option value="type3">Coffee</option>
@@ -29,29 +29,30 @@
 
             <div class="form-group">
                 <label for="input-short-description">Product's short description</label>
-                <input require type="text" name="shortDescription" id="input-short-description"
+                <input require type="text" name="shortDescription" class="form-control" id="input-short-description"
                     placeholder="Describe your product">
             </div>
 
 
             <div class="form-group">
                 <label for="input-long-description">Product's long description</label>
-                <textarea name="longDescription" id="long-description" placeholder="Describe your product"></textarea>
+                <textarea name="longDescription" class="form-control" id="long-description"
+                    placeholder="Describe your product"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="product-quantity">Product's quantity</label>
-                <input require type="number" name="productQuantity" id="product-quantity">
+                <input require type="number" name="productQuantity" class="form-control" id="product-quantity">
             </div>
 
             <div class="form-group">
                 <label for="product-price">Product's price</label>
-                <input require type="number" name="productPrice" id="product-price">
+                <input require type="number" name="productPrice" class="form-control" id="product-price">
             </div>
 
             <div class="form-group">
                 <label for="supply-trigger">Supply Trigger</label>
-                <input require type="number" name="supplyTrigger" id="supply-trigger">
+                <input require type="number" name="supplyTrigger" class="form-control" id="supply-trigger">
             </div>
             <button class="btn btn-success float-right">Create!</button>
         </form
