@@ -133,6 +133,17 @@ userRouter.post(
     })
       .then((renderUser) => {
         res.redirect(`/user/profile/${renderUser._id}`);
+        switch (renderUser.role) {
+          case 'client':
+            res.redirect(`/user/home`);
+            break;
+          case 'owner':
+            res.redirect(`/user/${renderUser._id}/home`);
+            break;
+          case 'supplier':
+            res.redirect(`/user/${renderUser._id}/home/supplier`);
+            break;
+        }
       })
       .catch((err) => {
         next(err);
@@ -263,7 +274,11 @@ userRouter.post(
     const quantity = req.body.productQuantity;
     const price = req.body.productPrice;
     const supplyTrigger = req.body.supplyTrigger;
-    const productPhotoUrl = req.file.url;
+
+    let productPhotoUrl;
+    if (req.file) {
+      const productPhotoUrl = req.file.url;
+    }
 
     return Product.findByIdAndUpdate(
       productId,
@@ -283,8 +298,6 @@ userRouter.post(
     )
       .populate('ownerId')
       .then((product) => {
-        //Use render or redirect ???
-        // res.render('user/product/single', { product });
         res.redirect(`/user/${product.ownerId._id}/product/${product._id}`);
       })
       .catch((err) => {
@@ -310,13 +323,5 @@ userRouter.post(
       });
   }
 );
-
-// ---------->> SUPPLIERS ROUTES <<---------------
-
-// profile page
-
-// list of needed items
-
-// product view information
 
 module.exports = userRouter;
