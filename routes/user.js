@@ -70,7 +70,7 @@ userRouter.get('/:userId/home/supplier', routeGuard, roleGuard(['supplier']), (r
 userRouter.get('/home', (req, res, next) => {
   const userId = req.params.userId;
 
-  Product.find({ $expr: { $gte: ['$quantity', '$supplyTrigger.quantity'] } })
+  Product.find({ $expr: { $gt: ['$quantity', '$supplyTrigger.quantity'] } })
     .populate('ownerId')
     .then((products) => {
       res.render('user/home-page-layout', { products, userId });
