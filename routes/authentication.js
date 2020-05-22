@@ -58,9 +58,9 @@ router.post('/sign-up', (req, res, next) => {
         // to: `${newUser.email}`, //Change this when to deploy application
         subject: `${newUser.name}, welcome to Suppli`,
         // Local
-        // html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="http://localhost:3000/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
+        // html: `<strong>Hello ${newUser.name}</strong><br/> <br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="http://localhost:3000/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
         // Heroku
-        html: `<strong>Hello ${newUser.name}</strong><br/> <strong>Hello ${newUser.email}</strong><br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="https://supplii.herokuapp.com/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
+        html: `<strong>Hello ${newUser.name}</strong><br/> <br/> <em>Click on the following link to confirm your registration.</em> <br/> <a href="https://supplii.herokuapp.com/authentication/welcome/${newUser.confirmation.token}">Confirm your registration</a> <br/> <p>Thank you for joining Suppli<p/>`
       });
     })
     .then((emailResult) => {
@@ -148,9 +148,17 @@ router.post('/sign-in', (req, res, next) => {
     .then((compResult) => {
       if (compResult) {
         req.session.userId = signInUser._id;
-        // res.locals.user = signInUser;
-        // req.user = signInUser;
-        res.redirect(`/user/${signInUser._id}/home`);
+        switch (signInUser.role) {
+          case 'client':
+            res.redirect(`/user/home`);
+            break;
+          case 'owner':
+            res.redirect(`/user/${signInUser._id}/home`);
+            break;
+          case 'supplier':
+            res.redirect(`/user/${signInUser._id}/home/supplier`);
+            break;
+        }
       } else {
         return Promise.reject(new Error('Password does not match'));
       }

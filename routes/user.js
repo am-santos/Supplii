@@ -45,6 +45,7 @@ userRouter.get('/:userId/home', routeGuard, roleGuard(allowedRoles), (req, res, 
   const userId = req.params.userId;
 
   Product.find({ ownerId: userId })
+    .sort({ addedDate: -1 })
     .then((products) => {
       res.render('user/home-page-layout', { products, userId });
     })
@@ -58,6 +59,7 @@ userRouter.get('/:userId/home/supplier', routeGuard, roleGuard(['supplier']), (r
   const userId = req.params.userId;
 
   Product.find({ $expr: { $lte: ['$quantity', '$supplyTrigger.quantity'] } })
+    .sort({ addedDate: -1 })
     .then((products) => {
       res.render('user/home-page-layout', { products, userId });
     })
@@ -70,7 +72,8 @@ userRouter.get('/:userId/home/supplier', routeGuard, roleGuard(['supplier']), (r
 userRouter.get('/home', (req, res, next) => {
   const userId = req.params.userId;
 
-  Product.find({ $expr: { $gt: ['$quantity', '$supplyTrigger.quantity'] } })
+  Product.find({ quantity: { $gt: 0 } })
+    .sort({ addedDate: -1 })
     .populate('ownerId')
     .then((products) => {
       res.render('user/home-page-layout', { products, userId });
@@ -189,7 +192,11 @@ userRouter.post(
       supplyTrigger
     } = req.body;
 
-    const productPhotoUrl = req.file.url;
+    let productPhotoUrl;
+
+    if (req.file) {
+      productPhotoUrl = req.file.url;
+    }
 
     return Product.create({
       ownerId,
