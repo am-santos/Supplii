@@ -8,7 +8,7 @@ Suppliers have their own page of products. Products that have a stock below the 
 
 Connect with this network of clients, product owners and suppliers!
 
- - https://trees-armageddon.netlify.app/
+ - https://supplii.herokuapp.com/
 
 Used Techs:
   - Node.js
