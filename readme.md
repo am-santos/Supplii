@@ -1,4 +1,5 @@
-# IronHack - 2nd Project - Web APP
+# Supplii
+## IronHack - 2nd Project - Web APP
 
 Product's management tool.
 
