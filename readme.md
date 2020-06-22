@@ -1,5 +1,7 @@
 # Supplii
-## IronHack - 2nd Project - Web APP
+
+## Web APP w/ Express.js, MongoDB and Handlebars
+### Web Development Bootcamp's Project
 
 Product's management tool.
 
