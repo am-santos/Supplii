@@ -4,7 +4,7 @@ Product's management tool.
 
 It connects any user with product owners, with a dashboard of available products and product's description page.
 
-Suppliers have their own page of products that have a stock below the threshold quantity defined by product's owner.
+Suppliers have their own page of products. Products that have a stock below the threshold quantity defined by product's owner.
 
 Connect with this network of clients, product owners and suppliers!
 
